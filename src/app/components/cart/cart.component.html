@@ -1,0 +1,96 @@
+<div class="container my-3">
+  <div class="row d-flex flex-wrap align-items-center">
+    <div class="col-12 col-md-7">
+
+      <div class="card mb-3" *ngFor="let p of cartList">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="assets/images/{{p.thumbnail}}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h5 class="card-title">{{p.title}}</h5>
+              <form>
+                <!-- <select name="quantity" class="my-4" [(ngModel)]="p.quantity" (ngModelChange)="calcTotal()">
+                  <option *ngFor="let num of quantites" [value]="num">{{num}}</option>
+                </select> -->
+                <input type="number" name="quantity" min=1 [(ngModel)]="p.quantity" (ngModelChange)="calcTotal()" />
+              </form>
+              <p class="card-text"><small class="text-muted">${{p.price}}</small></p>
+            </div>
+          </div>
+          <div class="col-12 col-md-2 d-flex align-items-center">
+            <button class="btn btn-danger my-auto" (click)="removeItem(p)">Remove</button>
+          </div>
+
+        </div>
+      </div>
+      <p *ngIf="cartList.length>0">Total price: $<strong>{{totalPrice}}</strong></p>
+      <h3 *ngIf="!cartList.length">Your cart is empty!</h3>
+
+    </div>
+    <div class="col-12 col-md-5">
+      <div>
+        <h3>Checkout Form:</h3>
+        <form [formGroup]="checkoutForm" (ngSubmit)="UserDetails()">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name: *</label>
+            <input type="text" class="form-control"
+              [ngClass]="{'border-danger': checkoutForm.controls['name'].invalid && checkoutForm.controls['name'].touched}"
+              formControlName="name" id="name" aria-describedby="nameHelp">
+
+
+            <div class="text-danger"
+              *ngIf="checkoutForm.controls['name'].touched && (checkoutForm.controls['name'].errors?.['required'] || emptyName==true)">
+              Your name is required</div>
+            <div class="text-danger"
+              *ngIf="checkoutForm.controls['name'].touched && checkoutForm.controls['name'].errors?.['minlength']">Your
+              name should
+              be
+              at least {{minNameVal}} characters</div>
+
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Address: * <small class="muted">(for shipping)</small></label>
+            <input type="text" class="form-control"
+              [ngClass]="{'border-danger': checkoutForm.controls['address'].invalid && checkoutForm.controls['address'].touched}"
+              formControlName="address" id="address" required>
+          </div>
+          <div class="text-danger"
+            *ngIf="checkoutForm.controls['address'].touched && (checkoutForm.controls['address'].errors?.['required'] || checkoutForm.controls['address'].errors?.['pattern'])">
+            Your address is required</div>
+          <div class="text-danger"
+            *ngIf="checkoutForm.controls['address'].touched && checkoutForm.controls['address'].errors?.['minlength']">
+            Your address should
+            be
+            at least {{minAddressVal}} characters</div>
+
+
+          <div class="mb-3">
+            <label for="c-card" class="form-label">Your credit card: *</label>
+            <input type="text" class="form-control"
+              [ngClass]="{'border-danger': checkoutForm.controls['card'].invalid && checkoutForm.controls['card'].touched}"
+              formControlName="card" id="c-card" aria-describedby="cardHelp" min="16" max="16">
+
+            <div class="text-danger"
+              *ngIf="checkoutForm.controls['card'].touched && checkoutForm.controls['card'].errors?.['required']">
+              Your card number is required.</div>
+            <div class="text-danger"
+              *ngIf="checkoutForm.controls['card'].touched && checkoutForm.controls['card'].errors?.['pattern']">
+              Your card number should consist of numbers only.</div>
+
+            <div class="text-danger"
+              *ngIf="checkoutForm.controls['card'].touched && (checkoutForm.controls['card'].errors?.['minlength'] || checkoutForm.controls['card'].errors?.['maxlength'])">
+              Your card should
+              consist of not more or less than {{minMaxCardVal}} numbers.</div>
+
+            <div id="cardHelp" class="form-text">Please fill your credit card, should be 16 numbers</div>
+          </div>
+          <!-- <button class="btn btn-dark" [disabled]="checkoutForm.invalid" (click)="UserDetails()"
+            [routerLink]="['/confirm', {name: user.name, totalPrice:totalPrice}]">Submit</button> -->
+          <button class="btn btn-dark" [disabled]="checkoutForm.invalid" (click)="UserDetails()">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

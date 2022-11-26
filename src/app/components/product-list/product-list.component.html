@@ -1,0 +1,6 @@
+<div class="container">
+  <div class="row d-flex flex-wrap">
+    <app-product-item [ngClass]="['col-12 col-md-4 mb-2']" *ngFor="let p of products" [product]="p"
+      (selectedProduct)="addItem($event)"></app-product-item>
+  </div>
+</div>

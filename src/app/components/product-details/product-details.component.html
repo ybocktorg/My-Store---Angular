@@ -1,0 +1,27 @@
+<div class="col-md-12 mt-2">
+  <div class="container">
+    <div class="row d-flex flex-wrap">
+      <div class="col-12 col-md-4 imageContainer"><img src="assets/images/{{product?.thumbnail}}"
+          class="card-img img-fluid" width="96" height="350" alt="">
+      </div>
+      <div class="col-12 col-md-8">
+
+        <div class="mb-2">
+          <p class="font-weight-semibold mb-2">
+            <strong>Product name: </strong> <span>{{product?.title}}</span>
+          </p>
+        </div>
+
+        <p class="mb-0 font-weight-semibold"><strong>Price: </strong> <span>${{product?.price}}</span></p>
+        <p class="mb-0 font-weight-semibold"><strong>Description: </strong><br />{{product?.description}}</p>
+        <form class="py-3">
+          <select name="quantity" class="my-4" [(ngModel)]="quantity">
+            <option *ngFor="let num of quantites" [value]="num">{{num}}</option>
+          </select>
+        </form>
+        <button type="button" class="btn btn-dark" (click)="addItemToCart(product)"><i class="fa fa-cart-plus mr-2"></i>
+          Add to cart</button>
+
+      </div>
+    </div>
+  </div>

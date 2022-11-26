@@ -1,6 +1,21 @@
-# MyShop
+# MyStore
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.9.
+
+## Run the project
+
+This step require that you are installing node.js in your machine, if not yet please visit "https://nodejs.org/en/", download and install the lastest stable version.
+
+Run `npm install` in the terminal refrence the same project folder.
+
+When you run `npm install`, The needed node packages will be installed, then you can run `ng serve`
+
+## How to use the project(FrontEnd)
+
+- the project main page is product list (/products)
+- User can add any or many products as he/she wants and choose the quantity of each. from product list or product details.
+- After the user finish adding the product he/she wants, can check cart list by pressing cart on the navbar links on to of page. Then he/she has the ability to adjust the quantity of items, or remove any product from the cart product list.
+- the last step to confirm order that the user should fill the requested checkout form with valid data, then click submit.
 
 ## Development server
 
