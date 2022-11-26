@@ -78,10 +78,25 @@ export class CartComponent implements OnInit {
     });
   }
 
+  confirmRemove(product: Product) {
+    let confirMsg = 'Are you sure you want to remove this product?';
+    if (confirm(confirMsg) == true) {
+      this.removeItem(product);
+      setTimeout(() => {
+        this.productRemovedConfirmation();
+      }, 100);
+    } else {
+    }
+  }
+
   removeItem(product: Product) {
     this.cartServ.removeOneItem(product.id);
     this.calcTotal();
     return this.cartList;
+  }
+
+  productRemovedConfirmation() {
+    alert('Product has been removed successfuly!');
   }
 
   UserDetails() {
